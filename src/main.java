@@ -1,29 +1,16 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 //package com.tutorialspoint;
 
 public class main {
-    public static String dbAddress = "jdbc:mysql://projgw.cse.cuhk.edu.hk:2312/a061";
-    public static String dbUsername = "a061";
-    public static String dbPassword = "vapJemim";
-
-    public static Connection connectToOracle() {
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(dbAddress, dbUsername, dbPassword);
-        } catch (ClassNotFoundException e) {
-            System.out.println("[Error]: Java MySQL DB Driver not found!!");
-            System.exit(0);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return con;
-    }//completed
+    public static Scanner input = new Scanner(System.in);
 
     public static void createTables(Connection mySQLDB) throws SQLException {
         String neaSQL = "CREATE TABLE nea(";
@@ -362,7 +349,7 @@ public class main {
 
         while (true) {
             try {
-                Connection mySQLDB = connectToOracle();
+                Connection mySQLDB = Database.connectToOracle();
                 System.out.println();
                 System.out.println("-----Main menu-----");
                 System.out.println("What kinds of operation would you like to perform?");
@@ -372,21 +359,18 @@ public class main {
                 System.out.println("0. Exit this program");
                 System.out.print("Enter Your Choice: ");
 
-                String answer = menuAns.nextLine();
+                String answer = input.nextLine();
 
                 if (answer.equals("1")) {
                     adminMenu(menuAns, mySQLDB);
                 }
-                /*
-                else if(answer.equals("2"))
-                {
-                	staffMenu(menuAns, mySQLDB);
+                else if(answer.equals("2")) {
+                	//
                 }
-                else if(answer.equals("3"))
-                {
-                	managerMenu(menuAns, mySQLDB);
+                else if(answer.equals("3")) {
+                    Staff temp = new Staff(mySQLDB);
+                    temp.menu();
                 }
-                */
                 else if (answer.equals("0")) {
                     break;
                 } else {
@@ -398,6 +382,7 @@ public class main {
         }
 
         menuAns.close();
+        input.close();
         System.exit(0);
     }
 

@@ -8,19 +8,19 @@ import java.util.Set;
 
 public class Staff extends Console{
     Connection mySQLDB;
-    String description = "spacecraft rental staff";
-    String[] options = {"1. Rent a spacecraft",
-            "2. Return a spacecraft",
-            "3. List all spacecraft currently rented out (on a mission) for a certain period",
-            "4. List the number of spacecrafts currently rented out out by each Agency (in alphabetical order)"};
-
 
     public Staff(Connection mySQLDB) {
         this.mySQLDB = mySQLDB;
+        this.user = "spacecraft rental staff";
+        this.options = new String[]{"1. Rent a spacecraft",
+                "2. Return a spacecraft",
+                "3. List all spacecraft currently rented out (on a mission) for a certain period",
+                "4. List the number of spacecrafts currently rented out out by each Agency (in alphabetical order)"};
     }
 
     public void menu() {
         Set<Integer> valid = new HashSet(Arrays.asList(0,1,2,3,4));
+        printMenu();
         int answer = getAnswer(valid);
 
         switch (answer) {
@@ -64,7 +64,7 @@ public class Staff extends Console{
         String agencyName = getAnswer("Enter the space agency name: ");
         String MID = getAnswer("Enter the MID: ");
         String SNum = getAnswer("Enter the SNum: ");
-
+        System.out.printf("Agency Name: %s, MID: %s, SNum: %s \n",agencyName,MID,SNum);
         System.out.println("Spacecraft return successfully!");
     }
 

@@ -1,8 +1,10 @@
-import java.util.Scanner;
 import java.util.Set;
 
 public class Console {
-    public void printMenu(String user, String[] options) {
+    String user = "";
+    String[] options = {};
+
+    public void printMenu() {
         System.out.println();
         System.out.println("-----Operations for "+user+"-----");
         for(String option : options) {
@@ -12,21 +14,17 @@ public class Console {
     }
 
     public int getAnswer(Set<Integer> validOptions) {
-        Scanner input = new Scanner(System.in);
-        int option = Integer.valueOf(input.nextLine());
+        int option = Integer.valueOf(main.input.nextLine());
         while (!(validOptions.contains(option))) {
             System.out.println("[Error]: Wrong Input, Type in again!!!");
-            option = Integer.valueOf(input.nextLine());
+            option = Integer.valueOf(main.input.nextLine());
         }
-        input.close();
         return option;
     }
 
     public String getAnswer(String question) {
         System.out.println(question);
-        Scanner input = new Scanner(System.in);
-        String result = input.nextLine();
-        input.close();
+        String result = main.input.nextLine();
         return result;
     }
 }
