@@ -14,10 +14,19 @@ public class Console {
     }
 
     public int getAnswer(Set<Integer> validOptions) {
-        int option = Integer.valueOf(main.input.nextLine());
+        int option;
+        try {
+            option = Integer.parseInt(main.input.nextLine());
+        } catch(Exception e) {
+            option = -1;
+        }
         while (!(validOptions.contains(option))) {
             System.out.println("[Error]: Wrong Input, Type in again!!!");
-            option = Integer.valueOf(main.input.nextLine());
+            try {
+                option = Integer.parseInt(main.input.nextLine());
+            } catch(Exception e) {
+                option = -1;
+            }
         }
         return option;
     }

@@ -344,44 +344,38 @@ public class main {
 
 
     public static void main(String[] args) {
-        Scanner menuAns = new Scanner(System.in);
+        Connection mySQLDB = Database.connectToOracle();
         System.out.println("Welcome to NEAs Exploration Mission Design System!");
 
         while (true) {
-            try {
-                Connection mySQLDB = Database.connectToOracle();
-                System.out.println();
-                System.out.println("-----Main menu-----");
-                System.out.println("What kinds of operation would you like to perform?");
-                System.out.println("1. Operations for administrator");
-                System.out.println("2. Operations for exploration companies (rental customers)");
-                System.out.println("3. Operations for spacecraft rental staff");
-                System.out.println("0. Exit this program");
-                System.out.print("Enter Your Choice: ");
+            System.out.println();
+            System.out.println("-----Main menu-----");
+            System.out.println("What kinds of operation would you like to perform?");
+            System.out.println("1. Operations for administrator");
+            System.out.println("2. Operations for exploration companies (rental customers)");
+            System.out.println("3. Operations for spacecraft rental staff");
+            System.out.println("0. Exit this program");
+            System.out.print("Enter Your Choice: ");
 
-                String answer = input.nextLine();
+            String answer = input.nextLine();
 
-                if (answer.equals("1")) {
-                    adminMenu(menuAns, mySQLDB);
+            if (answer.equals("1")) {
+                try {
+                    adminMenu(main.input, mySQLDB);
+                } catch(SQLException e) {
+                    System.out.println(e);
                 }
-                else if(answer.equals("2")) {
-                	//
-                }
-                else if(answer.equals("3")) {
-                    Staff temp = new Staff(mySQLDB);
-                    temp.menu();
-                }
-                else if (answer.equals("0")) {
-                    break;
-                } else {
-                    System.out.println("[Error]: Wrong Input, Type in again!!!");
-                }
-            } catch (SQLException e) {
-                System.out.println(e);
+            } else if (answer.equals("2")) {
+                //
+            } else if (answer.equals("3")) {
+                Staff temp = new Staff(mySQLDB);
+                temp.menu();
+            } else if (answer.equals("0")) {
+                break;
+            } else {
+                System.out.println("[Error]: Wrong Input, Type in again!!!");
             }
         }
-
-        menuAns.close();
         input.close();
         System.exit(0);
     }
