@@ -126,14 +126,21 @@ public class Staff extends Console{
     }
 
     public void listAllRentedSpaceCrafts() {
-        String startDate = getAnswer("Enter the start date [DD-MM-YYYY]: ");
-        String endDate = getAnswer("Enter the end date [DD-MM-YYYY]: ");
+        String startDate = getAnswer("Enter the start date [YYYY-MM-DD]: ");
+        String endDate = getAnswer("Enter the end date [YYYY-MM-DD]: ");
         try {
             Statement rentStatement = mySQLDB.createStatement();
             ResultSet resultSet = rentStatement.executeQuery("select agency, mid, snum, checkoutDate " +
                     "from rentalRecord " +
                     "where checkoutDate >= '"+startDate+"' and checkoutDate <= '"+endDate+"' and returnDate is NULL " +
                     "order by checkoutDate desc;");
+            System.out.println("| Agency | MID | SNUM | CheckoutDate |");
+            while (resultSet.next()) {
+                System.out.printf("|%s | %s | %s | %s |\n", resultSet.getString("agency"),
+                        resultSet.getString("mid"),
+                        resultSet.getString("snum"),
+                        resultSet.getString("checkoutDate"));
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -146,6 +153,11 @@ public class Staff extends Console{
                     "from rentalRecord " +
                     "where returnDate is NULL " +
                     "group by agency;");
+            System.out.println("| Agency | Number |");
+            while (resultSet.next()) {
+                System.out.printf("|%s | %s |\n", resultSet.getString("Agency"),
+                        resultSet.getString("Number"));
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
