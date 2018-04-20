@@ -1,8 +1,6 @@
 import java.sql.Connection;
 import java.util.Scanner;
 
-//package com.tutorialspoint;
-
 public class main {
     public static Scanner input = new Scanner(System.in);
 

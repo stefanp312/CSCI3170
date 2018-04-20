@@ -82,10 +82,7 @@ public class Staff extends Console{
                 "where mid = "+MID+" and snum = "+SNum+" and agency = '"+agencyName+"';");
 
         // Check if the result set is empty
-        if (!results.isBeforeFirst() ) {
-            return false;
-        }
-        return true;
+        return results.isBeforeFirst();
     }
 
     public void returnSpaceCraft() {
