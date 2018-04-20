@@ -3,9 +3,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    public static String dbAddress = "jdbc:mysql://localhost/test";
-    public static String dbUsername = "root";
-    public static String dbPassword = "";
+    private static String dbAddress = "jdbc:mysql://localhost/test";
+    private static String dbUsername = "root";
+    private static String dbPassword = "";
 
     public static Connection connectToOracle() {
         Connection con = null;

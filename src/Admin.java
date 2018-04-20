@@ -21,7 +21,7 @@ public class Admin extends Console {
                 "4. Return to the main menu"};
     }
 
-    public void createTables() {
+    private void createTables() {
         try {
             String neaSQL = "CREATE TABLE nea(";
             neaSQL += "nid VARCHAR(10) NOT NULL,";
@@ -102,7 +102,7 @@ public class Admin extends Console {
         }
     }
 
-    public void deleteTables() {
+    private void deleteTables() {
         try {
             Statement stmt = mySQLDB.createStatement();
             System.out.print("Processing...");
@@ -121,7 +121,7 @@ public class Admin extends Console {
         }
     }
 
-    public void loadTables() {
+    private void loadTables() {
         String neaSQL = "INSERT INTO nea (nid, distance, family, duration, energy) VALUES (?,?,?,?,?)";
         String containSQL = "INSERT INTO contain (nid, Rtype) VALUES (?,?)";
         String resourceSQL = "INSERT INTO resource (Rtype, density, value) VALUES (?,?,?)";

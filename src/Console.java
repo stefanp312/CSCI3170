@@ -4,7 +4,7 @@ public class Console {
     String user = "";
     String[] options = {};
 
-    public void printMenu() {
+    protected void printMenu() {
         System.out.println();
         System.out.println("-----Operations for "+user+"-----");
         for(String option : options) {
@@ -13,7 +13,7 @@ public class Console {
         System.out.println("0. Return to the main menu");
     }
 
-    public int getAnswer(Set<Integer> validOptions) {
+    protected int getAnswer(Set<Integer> validOptions) {
         int option;
         try {
             option = Integer.parseInt(main.input.nextLine());
@@ -31,7 +31,7 @@ public class Console {
         return option;
     }
 
-    public String getAnswer(String question) {
+    protected String getAnswer(String question) {
         System.out.println(question);
         String result = main.input.nextLine();
         return result;
